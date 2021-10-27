@@ -1,5 +1,6 @@
 package com.example.quizapp2
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -17,6 +18,11 @@ class MainActivity : AppCompatActivity() {
         binding.etBtn.setOnClickListener {
             if(binding.nameField.text.toString().isEmpty()){
                 Toast.makeText(this,"You didn't fucken follow instructions",Toast.LENGTH_SHORT).show()
+            }
+            else{
+                val intent = Intent(this, QuestionViewActivity::class.java)
+                startActivity(intent)
+                finish()
             }
         }
 
