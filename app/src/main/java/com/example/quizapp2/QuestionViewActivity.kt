@@ -11,5 +11,6 @@ class QuestionViewActivity : AppCompatActivity() {
         setContentView(R.layout.activity_question_view)
 
         val questionsList = Constants.getQuestions()
+        Log.i("QuestionList size is","${questionsList.size}")
     }
 }
