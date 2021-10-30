@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.example.quizapp2.databinding.ActivityQuestionViewBinding
-
+//
 
 class QuestionViewActivity : AppCompatActivity() {
     private lateinit var binding: ActivityQuestionViewBinding
