@@ -9,6 +9,11 @@
         <item name="android:padding">16dp</item>
         <item name="android:layout_marginTop">10dp</item>
         <item name="android:layout_marginBottom">10dp</item>
-        <item name="android:background">@drawable/text_outline</item>
+        <item name="android:background">@drawable/default_text_outline</item>
+    </style>
+
+    <style name = "selected_text_button" parent="text_button">
+        <item name="android:background">@drawable/selected_text_outline</item>
+        <item name="android:textColor">@color/design_default_color_primary</item>
     </style>
 </resources>

@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Alex/AndroidStudioProjects/AndroidStudioProjects/QuizApp2/app/src/main/res/drawable/TextOutline.xml" value="0.5703125" />
+        <entry key="..\:/Users/Alex/AndroidStudioProjects/AndroidStudioProjects/QuizApp2/app/src/main/res/drawable/selected_text_outline.xml" value="0.40185185185185185" />
         <entry key="..\:/Users/Alex/AndroidStudioProjects/AndroidStudioProjects/QuizApp2/app/src/main/res/drawable/teststyle_bg.xml" value="0.34375" />
         <entry key="..\:/Users/Alex/AndroidStudioProjects/AndroidStudioProjects/QuizApp2/app/src/main/res/drawable/text_outline.xml" value="0.5703125" />
         <entry key="..\:/Users/Alex/AndroidStudioProjects/AndroidStudioProjects/QuizApp2/app/src/main/res/layout/activity_main.xml" value="0.26208333333333333" />
