@@ -15,6 +15,10 @@ class QuestionViewActivity : AppCompatActivity() {
     private var tvProgress: TextView? = null
     private var tvQuestion: TextView? = null
     private var ivImage: ImageView? = null
+    private var tvOptionOne: TextView? = null
+    private var tvOptionTwo: TextView? = null
+    private var tvOptionThree: TextView? = null
+    private var tvOptionFour: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,8 +30,26 @@ class QuestionViewActivity : AppCompatActivity() {
         tvProgress = binding.tvProgress
         tvQuestion = binding.tvQuestion
         ivImage = binding.ivImage
+        tvOptionOne = binding.optionOne
+        tvOptionTwo = binding.optionTwo
+        tvOptionThree = binding.optionThree
+        tvOptionFour = binding.optionFour
+
 
         val questionsList = Constants.getQuestions()
         Log.i("QuestionList size is","${questionsList.size}")
+        var currentPosition = 1
+        var cQuestion = questionsList[currentPosition -1]
+
+        ivImage?.setImageResource(cQuestion.image)
+        progressBar?.progress = currentPosition
+        tvProgress?.text = "$currentPosition / ${progressBar?.max}"
+        tvQuestion?.text = cQuestion.question
+        tvOptionOne?.text = cQuestion.optionOne
+        tvOptionTwo?.text = cQuestion.optionTwo
+        tvOptionThree?.text = cQuestion.optionThree
+        tvOptionFour?.text = cQuestion.optionFour
+
+
     }
 }

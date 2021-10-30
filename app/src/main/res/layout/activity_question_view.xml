@@ -60,17 +60,22 @@
         </LinearLayout>
 
         <TextView
-            android:text="Argentina"
+            android:id="@+id/optionOne"
+            tools:text="Option 1"
             style="@style/text_button" />
         <TextView
-            android:text="Argentina"
+            android:id="@+id/optionTwo"
+            tools:text="Option 2"
             style="@style/text_button" />
         <TextView
-            android:text="Argentina"
+            android:id="@+id/optionThree"
+            tools:text="Option 3"
             style="@style/text_button" />
         <TextView
-            android:text="Argentina"
+            android:id="@+id/optionFour"
+            tools:text="Option 4"
             style="@style/text_button" />
+
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
