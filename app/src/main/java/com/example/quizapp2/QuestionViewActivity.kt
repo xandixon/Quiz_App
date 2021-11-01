@@ -5,10 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.widget.*
 import com.example.quizapp2.databinding.ActivityQuestionViewBinding
 
 
@@ -44,6 +41,12 @@ class QuestionViewActivity : AppCompatActivity(), View.OnClickListener {
         tvOptionThree = binding.optionThree
         tvOptionFour = binding.optionFour
         btnSubmit = binding.btnSubmit
+
+        tvOptionOne?.setOnClickListener(this)
+        tvOptionTwo?.setOnClickListener(this)
+        tvOptionThree?.setOnClickListener(this)
+        tvOptionFour?.setOnClickListener(this)
+        btnSubmit?.setOnClickListener(this)
 
         mQuestionsList = Constants.getQuestions()
         setQuestion()
@@ -83,7 +86,21 @@ class QuestionViewActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    override fun onClick(v: View?) {
-        TODO("Not yet implemented")
+    private fun selectOptionView(tv: TextView, selectedOption: Int){
+        mSelectedOptionPosition = selectedOption
+        defaultOptionsView()
+        tv.setTextAppearance(R.style.selected_text_button)
+        tv.setBackgroundResource(R.drawable.selected_text_outline)
+    }
+
+    override fun onClick(view: View?) {
+        when(view?.id){
+            R.id.optionOne -> tvOptionOne?.let{selectOptionView(it,1)}
+            R.id.optionTwo -> tvOptionTwo?.let{selectOptionView(it,2)}
+            R.id.optionThree -> tvOptionThree?.let{selectOptionView(it,3)}
+            R.id.optionFour -> tvOptionFour?.let{selectOptionView(it,4)}
+            R.id.btn_submit -> {}
+            //todo implement submit button
+        }
     }
 }
