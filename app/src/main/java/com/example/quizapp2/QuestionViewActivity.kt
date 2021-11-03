@@ -57,7 +57,7 @@ class QuestionViewActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun setQuestion() {
         var cQuestion = mQuestionsList!![mCurrentPosition - 1]
-
+        defaultOptionsView()
         ivImage?.setImageResource(cQuestion.image)
         progressBar?.progress = mCurrentPosition
         tvProgress?.text = "$mCurrentPosition / ${progressBar?.max}"
@@ -67,9 +67,7 @@ class QuestionViewActivity : AppCompatActivity(), View.OnClickListener {
         tvOptionThree?.text = cQuestion.optionThree
         tvOptionFour?.text = cQuestion.optionFour
 
-        if(mCurrentPosition == mQuestionsList!!.size){
-            btnSubmit?.text = "Finish"
-        }else btnSubmit?.text = "Submit"
+
     }
 
     private fun defaultOptionsView(){
@@ -99,8 +97,34 @@ class QuestionViewActivity : AppCompatActivity(), View.OnClickListener {
             R.id.optionTwo -> tvOptionTwo?.let{selectOptionView(it,2)}
             R.id.optionThree -> tvOptionThree?.let{selectOptionView(it,3)}
             R.id.optionFour -> tvOptionFour?.let{selectOptionView(it,4)}
-            R.id.btn_submit -> {}
+            R.id.btn_submit -> {
+                if(mSelectedOptionPosition == 0) {
+                    mCurrentPosition++
+                    when{mCurrentPosition<=mQuestionsList!!.size -> setQuestion()
+                    else -> Toast.makeText(this, "End",Toast.LENGTH_SHORT).show()}
+                    btnSubmit?.text = "Submit"
+                    if(mCurrentPosition == mQuestionsList!!.size) btnSubmit?.text = "Finish"
+
+                }else{
+                    val question = mQuestionsList?.get(mCurrentPosition -1)
+                    if(question!!.correctAnswer != mSelectedOptionPosition) answerView(mSelectedOptionPosition,R.drawable.wrong_option_border)
+                    answerView(question.correctAnswer,R.drawable.correct_option_border)
+                    mSelectedOptionPosition = 0
+                    if(mCurrentPosition < mQuestionsList!!.size) btnSubmit?.text = "Go to next question"
+                }
+
+
+            }
             //todo implement submit button
+        }
+    }
+
+    private fun answerView(answer:Int, drawableView: Int){
+        when(answer){
+            1 -> tvOptionOne?.setBackgroundResource(drawableView)
+            2 -> tvOptionTwo?.setBackgroundResource(drawableView)
+            3 -> tvOptionThree?.setBackgroundResource(drawableView)
+            4 -> tvOptionFour?.setBackgroundResource(drawableView)
         }
     }
 }
