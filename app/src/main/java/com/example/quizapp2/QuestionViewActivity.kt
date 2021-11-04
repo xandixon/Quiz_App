@@ -71,6 +71,7 @@ class QuestionViewActivity : AppCompatActivity(), View.OnClickListener {
         tvOptionTwo?.text = cQuestion.optionTwo
         tvOptionThree?.text = cQuestion.optionThree
         tvOptionFour?.text = cQuestion.optionFour
+        mSelectedOptionPosition = 5
 
 
     }
@@ -90,10 +91,12 @@ class QuestionViewActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun selectOptionView(tv: TextView, selectedOption: Int){
-        mSelectedOptionPosition = selectedOption
-        defaultOptionsView()
-        tv.setTextAppearance(R.style.selected_text_button)
-        tv.setBackgroundResource(R.drawable.selected_text_outline)
+        if (mSelectedOptionPosition!=0) {
+            mSelectedOptionPosition = selectedOption
+            defaultOptionsView()
+            tv.setTextAppearance(R.style.selected_text_button)
+            tv.setBackgroundResource(R.drawable.selected_text_outline)
+        }
     }
 
     override fun onClick(view: View?) {
@@ -107,7 +110,8 @@ class QuestionViewActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun submit() {
-        if (mSelectedOptionPosition == 0) {
+        if (mSelectedOptionPosition == 5){}
+        else if (mSelectedOptionPosition == 0) {
             mCurrentPosition++
             when {
                 mCurrentPosition <= mQuestionsList!!.size -> setQuestion()
