@@ -4,9 +4,9 @@ data class Question(
     val id: Int,
     val question: String,
     val image: Int,
-    val optionOne: String,
-    val optionTwo: String,
-    val optionThree: String,
-    val optionFour:String,
-    val correctAnswer: Int) {
+    var optionOne: String,
+    var optionTwo: String,
+    var optionThree: String,
+    var optionFour:String,
+    var correctAnswer: Int) {
 }

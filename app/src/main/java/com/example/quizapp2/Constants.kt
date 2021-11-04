@@ -1,5 +1,7 @@
 package com.example.quizapp2
 
+import android.util.Log
+
 object Constants{
 
     const val USER_NAME: String = "user_name"
@@ -108,6 +110,19 @@ object Constants{
         )
 
         questionsList.add(que10)
+
+        for (question in questionsList){
+            Log.i("the correct answer was in position","${question.correctAnswer}")
+            var ansList = arrayListOf<String>(question.optionOne,question.optionTwo,question.optionThree,question.optionFour)
+            val randOrder = arrayListOf<Int>(1,2,3,4).shuffled()
+
+            question.correctAnswer = randOrder.indexOf(question.correctAnswer)+1
+
+            question.optionOne = ansList[randOrder[0]-1]
+            question.optionTwo = ansList[randOrder[1]-1]
+            question.optionThree = ansList[randOrder[2]-1]
+            question.optionFour = ansList[randOrder[3]-1]
+        }
 
         return questionsList
     }

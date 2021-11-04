@@ -102,33 +102,38 @@ class QuestionViewActivity : AppCompatActivity(), View.OnClickListener {
             R.id.optionTwo -> tvOptionTwo?.let{selectOptionView(it,2)}
             R.id.optionThree -> tvOptionThree?.let{selectOptionView(it,3)}
             R.id.optionFour -> tvOptionFour?.let{selectOptionView(it,4)}
-            R.id.btn_submit -> {
-                if(mSelectedOptionPosition == 0) {
-                    mCurrentPosition++
-                    when{mCurrentPosition<=mQuestionsList!!.size -> setQuestion()
-                    else -> {
-                        val intent = Intent(this, ResultActivity::class.java)
-                        intent.putExtra(Constants.USER_NAME, mUserName)
-                        intent.putExtra(Constants.CORRECT_ANSWERS,mCorrectAnswers)
-                        intent.putExtra(Constants.TOTAL_QUESTIONS,mQuestionsList?.size)
-                        startActivity(intent)
-                        finish()
+            R.id.btn_submit -> submit()
+        }
+    }
 
-                    }                    }
-                    btnSubmit?.text = "Submit"
-                    if(mCurrentPosition == mQuestionsList!!.size) btnSubmit?.text = "Finish"
+    private fun submit() {
+        if (mSelectedOptionPosition == 0) {
+            mCurrentPosition++
+            when {
+                mCurrentPosition <= mQuestionsList!!.size -> setQuestion()
+                else -> {
+                    val intent = Intent(this, ResultActivity::class.java)
+                    intent.putExtra(Constants.USER_NAME, mUserName)
+                    intent.putExtra(Constants.CORRECT_ANSWERS, mCorrectAnswers)
+                    intent.putExtra(Constants.TOTAL_QUESTIONS, mQuestionsList?.size)
+                    startActivity(intent)
+                    finish()
 
-                }else{
-                    val question = mQuestionsList?.get(mCurrentPosition -1)
-                    if(question!!.correctAnswer != mSelectedOptionPosition) answerView(mSelectedOptionPosition,R.drawable.wrong_option_border)
-                    else mCorrectAnswers++
-                    answerView(question.correctAnswer,R.drawable.correct_option_border)
-                    mSelectedOptionPosition = 0
-                    if(mCurrentPosition < mQuestionsList!!.size) btnSubmit?.text = "Go to next question"
                 }
-
-
             }
+            btnSubmit?.text = "Submit"
+            if (mCurrentPosition == mQuestionsList!!.size) btnSubmit?.text = "Finish"
+
+        } else {
+            val question = mQuestionsList?.get(mCurrentPosition - 1)
+            if (question!!.correctAnswer != mSelectedOptionPosition) answerView(
+                mSelectedOptionPosition,
+                R.drawable.wrong_option_border
+            )
+            else mCorrectAnswers++
+            answerView(question.correctAnswer, R.drawable.correct_option_border)
+            mSelectedOptionPosition = 0
+            if (mCurrentPosition < mQuestionsList!!.size) btnSubmit?.text = "Go to next question"
         }
     }
 
@@ -141,3 +146,6 @@ class QuestionViewActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 }
+
+//todo fix submit button bug
+//todo randomize orders
