@@ -1,5 +1,6 @@
 package com.example.quizapp2
 
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,6 +16,8 @@ class QuestionViewActivity : AppCompatActivity(), View.OnClickListener {
     private var mCurrentPosition: Int = 1
     private var mQuestionsList:ArrayList<Question>? = null
     private var mSelectedOptionPosition: Int = 0
+    private var mUserName: String? = null
+    private var mCorrectAnswers: Int = 0
 
     private var progressBar: ProgressBar? = null
     private var tvProgress: TextView? = null
@@ -31,6 +34,8 @@ class QuestionViewActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_question_view)
         binding = ActivityQuestionViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        mUserName = intent.getStringExtra(Constants.USER_NAME)
 
         progressBar = binding.progressBar
         tvProgress = binding.tvProgress
@@ -101,13 +106,22 @@ class QuestionViewActivity : AppCompatActivity(), View.OnClickListener {
                 if(mSelectedOptionPosition == 0) {
                     mCurrentPosition++
                     when{mCurrentPosition<=mQuestionsList!!.size -> setQuestion()
-                    else -> Toast.makeText(this, "End",Toast.LENGTH_SHORT).show()}
+                    else -> {
+                        val intent = Intent(this, ResultActivity::class.java)
+                        intent.putExtra(Constants.USER_NAME, mUserName)
+                        intent.putExtra(Constants.CORRECT_ANSWERS,mCorrectAnswers)
+                        intent.putExtra(Constants.TOTAL_QUESTIONS,mQuestionsList?.size)
+                        startActivity(intent)
+                        finish()
+
+                    }                    }
                     btnSubmit?.text = "Submit"
                     if(mCurrentPosition == mQuestionsList!!.size) btnSubmit?.text = "Finish"
 
                 }else{
                     val question = mQuestionsList?.get(mCurrentPosition -1)
                     if(question!!.correctAnswer != mSelectedOptionPosition) answerView(mSelectedOptionPosition,R.drawable.wrong_option_border)
+                    else mCorrectAnswers++
                     answerView(question.correctAnswer,R.drawable.correct_option_border)
                     mSelectedOptionPosition = 0
                     if(mCurrentPosition < mQuestionsList!!.size) btnSubmit?.text = "Go to next question"
@@ -115,7 +129,6 @@ class QuestionViewActivity : AppCompatActivity(), View.OnClickListener {
 
 
             }
-            //todo implement submit button
         }
     }
 
