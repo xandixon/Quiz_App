@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.etBtn.setOnClickListener {
             if(binding.nameField.text.toString().isEmpty()){
-                Toast.makeText(this,"You didn't fucken follow instructions",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"Please enter your name.",Toast.LENGTH_SHORT).show()
             }
             else{
                 val intent = Intent(this, QuestionViewActivity::class.java)
